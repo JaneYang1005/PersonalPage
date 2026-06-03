@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Yang - Personal Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* 顶部导航栏 - 占1/6高度 */
+        .header {
+            height: calc(100vh / 6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.8);
+        }
+
+        .nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .nav a:hover {
+            color: #e94560;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .nav a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            top: 0;
+            left: 50%;
+            background: #e94560;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav a:hover::before {
+            width: 100%;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: #e94560;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        /* 中间层 - 占2/3高度 */
+        .main {
+            height: calc(100vh * 2 / 3);
+            display: flex;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            animation: slideUp 0.8s ease 0.2s backwards;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .main-left {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .main-left img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .main-left img:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .main-right {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 60px;
+        }
+
+        .main-right h1 {
+            font-size: 56px;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            font-weight: 800;
+            overflow: hidden;
+            border-right: 3px solid #e94560;
+            white-space: nowrap;
+            animation: typing 2s steps(8) 0.5s forwards, blink 0.75s step-end infinite;
+            width: 0;
+        }
+
+        @keyframes typing {
+            to { width: 200px; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .main-right p {
+            font-size: 28px;
+            color: #333;
+            line-height: 1.6;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInText 1s ease 2.5s forwards;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .main-right p:hover {
+            transform: translateX(10px);
+            color: #e94560;
+        }
+
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+
+        /* 底部联系栏 - 占1/6高度 */
+        .footer {
+            height: calc(100vh / 6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            animation: slideUp 0.8s ease 0.4s backwards;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 15px 25px;
+            border-radius: 8px;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(233, 69, 96, 0.3);
+        }
+
+        .contact-item i {
+            font-size: 24px;
+            color: #e94560;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover i {
+            transform: rotate(360deg) scale(1.2);
+            color: #ff6b8a;
+        }
+
+        .contact-item span {
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover span {
+            color: #ff6b8a;
+        }
+
+        /* 涟漪效果 */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(233, 69, 96, 0.4);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航栏 -->
+        <header class="header">
+            <div class="logo" id="logo">Jane Yang</div>
+            <nav class="nav">
+                <a href="home.html" class="ripple-btn">Home</a>
+                <a href="resume.html" class="ripple-btn">Resume</a>
+                <a href="project.html" class="ripple-btn">Project</a>
+                <a href="contact.html" class="ripple-btn">Contact</a>
+            </nav>
+        </header>
+
+        <!-- 中间层 -->
+        <main class="main">
+            <div class="main-left">
+                <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=stylish%20cool%20long%20hair%20woman%20walking%20away%20back%20view%20city%20street%20moody%20atmosphere%20cinematic&image_size=square_hd" alt="Jane Yang" id="profile-img">
+            </div>
+            <div class="main-right">
+                <h1 id="hello-text">Hello,</h1>
+                <p>a bit about me</p>
+            </div>
+        </main>
+
+        <!-- 底部联系栏 -->
+        <footer class="footer">
+            <div class="contact-item" id="phone">
+                <i class="fas fa-phone"></i>
+                <span>+852 70525265</span>
+            </div>
+            <div class="contact-item" id="email">
+                <i class="fas fa-envelope"></i>
+                <span>83338086@qq.com</span>
+            </div>
+            <div class="contact-item" id="wechat">
+                <i class="fab fa-weixin"></i>
+                <span>83338086</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 涟漪效果
+        document.querySelectorAll('.ripple-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+                ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // 图片点击效果
+        const profileImg = document.getElementById('profile-img');
+        profileImg.addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+
+        // logo点击效果
+        const logo = document.getElementById('logo');
+        logo.addEventListener('click', function() {
+            this.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 600);
+        });
+
+        // 联系项点击效果
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // 鼠标跟随的粒子效果
+        const helloText = document.getElementById('hello-text');
+        helloText.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            this.style.textShadow = `${x / 20}px ${y / 20}px 10px rgba(233, 69, 96, 0.3)`;
+        });
+
+        helloText.addEventListener('mouseleave', function() {
+            this.style.textShadow = '';
+        });
+    </script>
+</body>
+</html>
